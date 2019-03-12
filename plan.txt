@@ -1,10 +1,11 @@
-Move to real data, get last 30 points
-Draw marks on mouse move
++Move to real data, get last 30 points
++Make classes for graphs, axis and float
 Separate graph layers
-Make classes for graphs, axis and float
-Make good float and mark
-Add scroll and zoom
 Make graph and axis scale according to data
+Draw marks on mouse move
+Make good float and mark
+Add minimap
+Add scroll and zoom
 Add animation
 Style buttons
 Add night mode
