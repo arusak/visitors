@@ -9,3 +9,4 @@ Add scroll and zoom
 Add animation
 Style buttons
 Add night mode
+Consider removing ChartsInfo
