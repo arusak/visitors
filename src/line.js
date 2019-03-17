@@ -1,11 +1,14 @@
 export class Line {
     constructor(info, container) {
+        this.container = container;
         this.info = info;
         this.dots = info.dots;
         this.ctx = this.createContext(info.width, info.height, container);
     }
 
-    draw(kx, ky, start, end) {
+    render(kx, ky, start, end) {
+        if (this.hidden) return;
+
         let that = this;
 
         function log(i) {
@@ -39,11 +42,13 @@ export class Line {
     }
 
     show() {
-
+        this.ctx.canvas.classList.remove('hidden');
+        this.hidden = false;
     }
 
     hide() {
-
+        this.ctx.canvas.classList.add('hidden');
+        this.hidden = true;
     }
 
     createContext(width, height, container) {

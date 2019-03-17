@@ -1,16 +1,19 @@
 +Move to real data, get last 30 points
 +Make classes for graphs, axis and float
 +Separate graph layers
-Add axis with ticks
-Make +graph and axis scale according to data
++Add axis with ticks
++Make +graph and +axis scale according to data
+Make labels positions more precise (correct algorithms and margins)
 Draw marks on mouse move
 Make good float and mark
 Add minimap
 ±Add pan and zoom
 Add animation for pan and zoom
-Add buttons
-Add animation for chart toggle
++Add buttons
++Add animation for chart toggle
+Scale Y with animation on chart show/hide
 Style buttons
 Add night mode
 Refactor: Consider removing ChartsInfo
+Refactor: Separate ButtonsController and ChartsController
 Try: use svg instead of canvas

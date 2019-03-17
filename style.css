@@ -2,12 +2,23 @@ body {
   font-family: sans-serif;
 }
 
+#scene {
+}
+
 #charts {
   position: relative;
 }
 
 #charts canvas {
   position: absolute;
+  transition: opacity 0.6s ease;
+  opacity: 1;
+}
+
+#charts canvas.hidden {
+  opacity: 0;
+  transform: translateY(-500px);
+  transition: opacity 0.5s ease, transform 0.6s linear;
 }
 
 #buttons {
@@ -63,7 +74,6 @@ body {
 
 #x-axis span,
 #y-axis span {
-  display: inline-block;
   position: absolute;
   font-size: 10px;
 }
@@ -75,11 +85,14 @@ body {
 #y-axis {
   display: inline-block;
   position: absolute;
+  z-index: -1;
   top: 0;
   left: 0;
-  width: 30px;
+  width: 600px;
 }
 
-#x-axis span {
+#y-axis span {
   left: 0;
+  width: 100%;
+  border-bottom: thin solid #ddd;
 }

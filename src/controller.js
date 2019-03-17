@@ -3,6 +3,7 @@ import {ChartInfo} from './chart-info.js';
 import {YAxis} from './y-axis.js';
 import {XAxis} from './x-axis.js';
 import {Minimap} from './minimap.js';
+import {ButtonsController} from './buttons.controller.js';
 
 const $dataSet = 4;
 const $defaultSlice = 100;
@@ -42,6 +43,7 @@ export class ChartController {
 
         this.chartsInfo = this.getChartsInfo(chartData);
         this.lines = this.chartsInfo.map(info => new Line(info, this.container));
+        new ButtonsController(this);
 
         this.kx = this.getKx();
         this.ky = this.getKy();
@@ -58,7 +60,7 @@ export class ChartController {
         // console.log(`[${this.start}, ${this.end}]`);
         this.lines.forEach(line => {
             line.erase();
-            line.draw(this.kx, this.ky, this.start, this.end);
+            line.render(this.kx, this.ky, this.start, this.end);
         });
         this.xAxis.render(this.start, this.end, this.kx);
         this.yAxis.render(this.maxY);
@@ -108,4 +110,12 @@ export class ChartController {
         this.render();
     }
 
+    showLine(idx) {
+        this.lines[idx].show();
+        this.lines[idx].render(this.kx, this.ky, this.start, this.end);
+    }
+
+    hideLine(idx) {
+        this.lines[idx].hide();
+    }
 }
