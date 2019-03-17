@@ -1,0 +1,20 @@
+body.night {
+  background: #242f3e;
+  color: #546778;
+}
+
+.night #y-axis span {
+  border-bottom: thin solid #293544;
+}
+
+.night #buttons button {
+  border-color: #344658;
+}
+
+body.night #night-switch {
+  display: none;
+}
+
+body:not(.night) #day-switch {
+  display: none;
+}
