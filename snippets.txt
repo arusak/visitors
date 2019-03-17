@@ -1,0 +1,1 @@
+s=document.getElementById('start');f = ()=>requestAnimationFrame(()=>{s.value--; s.dispatchEvent(new Event('change'));if (s.value > 0) f()});f()

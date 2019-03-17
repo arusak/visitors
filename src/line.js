@@ -12,7 +12,7 @@ export class Line {
             // console.log(`${start + i}, ${that.dots[i]} -> ${that.calcX(i, kx)}, ${that.calcY(i, start, ky)}`);
         }
 
-        console.log(' ');
+        // console.log(' ');
         this.ctx.beginPath();
         this.ctx.moveTo(0, this.calcY(0, start, ky));
         log(0);

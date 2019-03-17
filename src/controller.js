@@ -4,6 +4,7 @@ import {YAxis} from './y-axis.js';
 import {XAxis} from './x-axis.js';
 import {Minimap} from './minimap.js';
 
+const $dataSet = 4;
 const $defaultSlice = 100;
 const $width = 600;
 const $height = 400;
@@ -12,13 +13,13 @@ export class ChartController {
     constructor() {
         this.width = $width;
         this.height = $height;
-        this.container = document.getElementById('graph');
+        this.container = document.getElementById('charts');
         this.container.style.width = this.width + 'px';
         this.container.style.height = this.height + 'px';
 
         this.loadData().then(data => {
-            this.initCharts(data[4]);
-            this.redraw();
+            this.initCharts(data[$dataSet]);
+            this.render();
         });
     }
 
@@ -45,17 +46,22 @@ export class ChartController {
         this.kx = this.getKx();
         this.ky = this.getKy();
 
-        this.xAxis = new XAxis(this.getXAxisData(chartData));
-        this.yAxis = new YAxis();
+        this.xAxis = new XAxis(document.getElementById('x-axis'), $width, this.getXAxisData(chartData));
+        this.yAxis = new YAxis(document.getElementById('y-axis'), $height);
+
         this.minimap = new Minimap(this.container, this.chartsInfo, this.start, this.end, this.updateStart.bind(this), this.updateEnd.bind(this));
+
+        this.render();
     }
 
-    redraw() {
-        console.log(`[${this.start}, ${this.end}]`);
+    render() {
+        // console.log(`[${this.start}, ${this.end}]`);
         this.lines.forEach(line => {
             line.erase();
             line.draw(this.kx, this.ky, this.start, this.end);
         });
+        this.xAxis.render(this.start, this.end, this.kx);
+        this.yAxis.render(this.maxY);
     }
 
     getChartsInfo(chartData) {
@@ -82,8 +88,9 @@ export class ChartController {
             let piece = line.dots.slice(this.start, this.end);
             return Math.max(...piece);
         });
-        let maxOfAll = Math.max(...maxValues);
-        return this.height / maxOfAll;
+        this.maxY = Math.max(...maxValues);
+
+        return this.height / this.maxY;
     }
 
     updateStart(start) {
@@ -91,14 +98,14 @@ export class ChartController {
         // this.end = this.start + $defaultSlice - 1;
         this.kx = this.getKx();
         this.ky = this.getKy();
-        this.redraw();
+        this.render();
     }
 
     updateEnd(end) {
         this.end = +end;
         this.kx = this.getKx();
         this.ky = this.getKy();
-        this.redraw();
+        this.render();
     }
 
 }

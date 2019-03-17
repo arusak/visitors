@@ -1,8 +1,12 @@
-#graph {
+body {
+  font-family: sans-serif;
+}
+
+#charts {
   position: relative;
 }
 
-#graph canvas {
+#charts canvas {
   position: absolute;
 }
 
@@ -48,4 +52,34 @@
 #start, #end {
   display: block;
   width: 500px;
+}
+
+#x-axis {
+  display: inline-block;
+  position: relative;
+  height: 12px;
+  border-top: thin solid #cccccc;
+}
+
+#x-axis span,
+#y-axis span {
+  display: inline-block;
+  position: absolute;
+  font-size: 10px;
+}
+
+#x-axis span {
+  top: 0;
+}
+
+#y-axis {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+}
+
+#x-axis span {
+  left: 0;
 }
