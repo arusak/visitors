@@ -5,7 +5,7 @@ import {XAxis} from './x-axis.js';
 import {Minimap} from './minimap.js';
 import {ButtonsController} from './buttons.controller.js';
 
-const $dataSet = 4;
+const $dataSet = 1;
 const $defaultSlice = 100;
 const $width = 600;
 const $height = 400;
@@ -63,7 +63,7 @@ export class ChartController {
             line.render(this.kx, this.ky, this.start, this.end);
         });
         this.xAxis.render(this.start, this.end, this.kx);
-        this.yAxis.render(this.maxY);
+        this.yAxis.render(this.maxY, this.ky);
     }
 
     getChartsInfo(chartData) {

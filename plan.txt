@@ -3,7 +3,7 @@
 +Separate graph layers
 +Add axis with ticks
 +Make +graph and +axis scale according to data
-Make labels positions more precise (correct algorithms and margins)
+±Make labels positions more precise (correct algorithms and margins)
 Draw marks on mouse move
 Make good float and mark
 Add minimap
@@ -12,8 +12,9 @@ Add animation for pan and zoom
 +Add buttons
 +Add animation for chart toggle
 Scale Y with animation on chart show/hide
-Style buttons
-Add night mode
+Update minimap on show/hide
+±Style buttons
++Add night mode
 Refactor: Consider removing ChartsInfo
 Refactor: Separate ButtonsController and ChartsController
 Try: use svg instead of canvas
