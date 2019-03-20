@@ -4,8 +4,9 @@ import {YAxis} from './y-axis.js';
 import {XAxis} from './x-axis.js';
 import {Minimap} from './minimap.js';
 import {ButtonsController} from './buttons.controller.js';
+import {Mark} from './mark.js';
 
-const $dataSet = 1;
+const $dataSet = 4;
 const $defaultSlice = 100;
 const $width = 600;
 const $height = 400;
@@ -25,7 +26,7 @@ export class ChartController {
     }
 
     loadData() {
-        return fetch('https://rusak.me/tg/chart_data.json', {
+        return fetch('./tg/chart_data.json', {
             method: 'GET',
         }).catch(err => {
             console.error('Error loading chart data');
@@ -52,6 +53,8 @@ export class ChartController {
         this.yAxis = new YAxis(document.getElementById('y-axis'), $height);
 
         this.minimap = new Minimap(this.container, this.chartsInfo, this.start, this.end, this.updateStart.bind(this), this.updateEnd.bind(this));
+        this.mark = new Mark(this.lines, this.width, this.height);
+        this.mark.bgColor = 'white';
 
         this.render();
     }
@@ -62,6 +65,7 @@ export class ChartController {
             line.erase();
             line.render(this.kx, this.ky, this.start, this.end);
         });
+        this.mark.erase();
         this.xAxis.render(this.start, this.end, this.kx);
         this.yAxis.render(this.maxY, this.ky);
     }

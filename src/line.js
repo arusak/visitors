@@ -8,19 +8,24 @@ export class Line {
 
     render(kx, ky, start, end) {
         if (this.hidden) return;
-
-        let that = this;
+        // console.log(' ');
 
         function log(i) {
-            // console.log(`${start + i}, ${that.dots[i]} -> ${that.calcX(i, kx)}, ${that.calcY(i, start, ky)}`);
+            // console.log(`${start + i}, ${this.dots[i]} -> ${this.calcX(i, kx)}, ${this.calcY(i, start, ky)}`);
         }
 
-        // console.log(' ');
+        this.pixelsX = [];
+        this.pixelsY = [];
+
         this.ctx.beginPath();
         this.ctx.moveTo(0, this.calcY(0, start, ky));
         log(0);
         for (let i = 1; i < end - start; i++) {
-            this.ctx.lineTo(this.calcX(i, kx), this.calcY(i, start, ky));
+            let x = this.calcX(i, kx);
+            let y = this.calcY(i, start, ky);
+            this.ctx.lineTo(x, y);
+            this.pixelsX[i] = x;
+            this.pixelsY[i] = y;
             log(i);
         }
         this.ctx.strokeStyle = this.info.color;
@@ -30,7 +35,7 @@ export class Line {
 
 
     erase() {
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.clearRect(0, 0, this.info.width, this.info.height);
     }
 
     calcX(i, kx) {
