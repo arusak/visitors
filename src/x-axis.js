@@ -1,5 +1,4 @@
 const $maxTickWidth = 100;
-const $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export class XAxis {
     constructor(container, width, xDots) {
@@ -11,7 +10,7 @@ export class XAxis {
 
     prerender(dots) {
         this.wrapper = Object.assign(document.createElement('div'), {className: 'wrapper'});
-        this.ticks = dots.map(dot => Object.assign(document.createElement('span'), {innerText: formatDate(dot)}));
+        this.ticks = dots.map(dot => Object.assign(document.createElement('span'), {innerText: dot}));
         this.visibility = [];
 
         this.ticks.forEach((tick, idx) => {
@@ -45,9 +44,4 @@ export class XAxis {
             this.ticks[idx].style.left = kx * idx + 'px';
         }
     }
-}
-
-function formatDate(timestamp) {
-    let date = new Date(timestamp);
-    return `${$months[date.getMonth()]} ${date.getDate()}`;
 }

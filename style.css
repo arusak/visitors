@@ -56,11 +56,10 @@ body {
 }
 
 #float {
-  display: none;
-
   position: fixed;
-  top: 400px;
-  left: 20px;
+  z-index: 2;
+  top: 0;
+  left: 0;
 
   padding: 1rem;
   min-width: 4rem;
@@ -68,6 +67,9 @@ body {
   background: white;
   border: thin solid #ccc;
   border-radius: 5px;
+  opacity: 0;
+
+  transition: transform 0.2s ease;
 }
 
 #start, #end {

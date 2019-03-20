@@ -1,13 +1,17 @@
+import {Float} from './float.js';
+
 const $radius = 6;
 const $circleStrokeWidth = 4;
 
 export class Mark {
-    constructor(lines, width, height) {
+    constructor(lines, width, height, dates) {
         this.width = width;
         this.height = height;
         this.ctx = this.initCanvas(width, height);
         this.lines = lines;
+        this.dates = dates;
         this.rulerColor = '#dfe6eb';
+        this.float = new Float(width);
     }
 
     render(mouseX) {
@@ -18,16 +22,20 @@ export class Mark {
 
         let idx = Math.round((mouseX * visibleLines[0].pixelsX.length) / this.width);
         let x = visibleLines[0].pixelsX[idx];
+        let yPixels = visibleLines.map(line => line.pixelsY[idx]);
+        let yValues = visibleLines.map(line => line.dots[idx]);
 
         this.drawRuler(x);
+        this.float.render(x, this.dates[idx], yValues);
 
-        visibleLines.forEach(line => {
-            this.drawCircle(x, line.pixelsY[idx], line.info.color);
+        visibleLines.forEach((line, idx) => {
+            this.drawCircle(x, yPixels[idx], line.info.color);
         });
     }
 
     erase() {
         this.ctx.clearRect(0, 0, this.width, this.height);
+        this.float.hide();
     }
 
     drawCircle(x, y, color) {

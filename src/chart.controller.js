@@ -10,6 +10,7 @@ const $dataSet = 4;
 const $defaultSlice = 100;
 const $width = 600;
 const $height = 400;
+const $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export class ChartController {
     constructor() {
@@ -49,11 +50,12 @@ export class ChartController {
         this.kx = this.getKx();
         this.ky = this.getKy();
 
-        this.xAxis = new XAxis(document.getElementById('x-axis'), $width, this.getXAxisData(chartData));
+        let dates = this.getXAxisData(chartData);
+        this.xAxis = new XAxis(document.getElementById('x-axis'), $width, dates);
         this.yAxis = new YAxis(document.getElementById('y-axis'), $height);
 
         this.minimap = new Minimap(this.container, this.chartsInfo, this.start, this.end, this.updateStart.bind(this), this.updateEnd.bind(this));
-        this.mark = new Mark(this.lines, this.width, this.height);
+        this.mark = new Mark(this.lines, this.width, this.height, dates);
         this.mark.bgColor = 'white';
 
         this.render();
@@ -80,7 +82,7 @@ export class ChartController {
         let key = Object.keys(chartData.types)
             .find(key => chartData.types[key] === 'x');
 
-        return chartData.columns.find(col => col[0] === key).slice(1);
+        return chartData.columns.find(col => col[0] === key).slice(1).map(formatDate);
     }
 
     getKx() {
@@ -122,4 +124,9 @@ export class ChartController {
     hideLine(idx) {
         this.lines[idx].hide();
     }
+}
+
+function formatDate(timestamp) {
+    let date = new Date(timestamp);
+    return `${$months[date.getMonth()]} ${date.getDate()}`;
 }

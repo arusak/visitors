@@ -2,19 +2,21 @@
 +Make classes for graphs, axis and float
 +Separate graph layers
 +Add axis with ticks
-+Make +graph and +axis scale according to data
++Make graph and axis scale according to data
 +Add night mode
 +Add buttons
 +Add animation for chart toggle
-Draw marks on mouse move
-Make good float and mark
++Draw marks on mouse move
++Make float
 Add minimap
 ±Add pan and zoom
 Add animation for pan and zoom
 Scale Y with animation on chart show/hide
 Update minimap on show/hide
-±Make labels positions more precise (correct algorithms and margins)
-±Style buttons
+Make positions more precise (correct algorithms and margins)
+Style buttons
+Add weekday to float
+Style float
 Additional: adaptive
 Refactor: Consider removing ChartsInfo
 Refactor: Separate ButtonsController and ChartsController
