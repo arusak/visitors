@@ -63,13 +63,18 @@ body {
 
 #start, #end {
   display: block;
-  width: 500px;
+  width: 600px;
 }
 
 #x-axis {
   display: inline-block;
   position: relative;
-  height: 12px;
+  height: 10px;
+  overflow: hidden;
+}
+
+#x-axis .wrapper {
+  position: absolute;
 }
 
 #x-axis span,
@@ -79,7 +84,9 @@ body {
 }
 
 #x-axis span {
-  top: 0;
+  width: 50px;
+  margin-left: -25px;
+  text-align: center;
 }
 
 #y-axis {
