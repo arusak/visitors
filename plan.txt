@@ -17,6 +17,9 @@ Make positions more precise (correct algorithms and margins)
 Style buttons
 Add weekday to float
 Style float
+Format numbers in float
+Format numbers in y-label
+Make it full-screen in mobile Chrome
 Additional: adaptive
 Refactor: Consider removing ChartsInfo
 Refactor: Separate ButtonsController and ChartsController
