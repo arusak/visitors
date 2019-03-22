@@ -20,8 +20,9 @@ Style float
 Format numbers in float
 Format numbers in y-label
 Make it full-screen in mobile Chrome
+Debug gates (missing mouseup)
 Additional: adaptive
-Refactor: Consider removing ChartsInfo
-Refactor: Separate ButtonsController and ChartsController
 Try: use svg instead of canvas
 Opt: Mario
+Refactor: Consider removing ChartsInfo
+Refactor: Separate ButtonsController and ChartsController
