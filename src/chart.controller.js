@@ -54,7 +54,7 @@ export class ChartController {
         this.xAxis = new XAxis(document.getElementById('x-axis'), $width, dates);
         this.yAxis = new YAxis(document.getElementById('y-axis'), $height);
 
-        this.minimap = new Minimap(this.container, this.chartsInfo, this.start, this.end, this.updateStart.bind(this), this.updateEnd.bind(this));
+        this.minimap = new Minimap(this.container, this.width, this.lines, this.start, this.end, this.update.bind(this));
         this.mark = new Mark(this.lines, this.width, this.height, dates);
         this.mark.bgColor = 'white';
 
@@ -101,18 +101,15 @@ export class ChartController {
         return this.height / this.maxY;
     }
 
-    updateStart(start) {
-        this.start = +start;
-        // this.end = this.start + $defaultSlice - 1;
-        this.kx = this.getKx();
-        this.ky = this.getKy();
-        this.render();
-    }
+    update({start,end}) {
+        console.log(start,end);
 
-    updateEnd(end) {
-        this.end = +end;
+        this.start = start;
+        this.end = end;
+
         this.kx = this.getKx();
         this.ky = this.getKy();
+
         this.render();
     }
 

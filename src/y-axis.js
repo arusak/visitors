@@ -37,7 +37,7 @@ function div(number, divider) {
 function price(max) {
     let frac = max / $limit;
     let B = base(frac);
-    console.log('max:', max, 'frac:', frac, 'B:', B, '(frac div B):', div(frac, B));
+    // console.log('max:', max, 'frac:', frac, 'B:', B, '(frac div B):', div(frac, B));
     return div(frac, B) * B;
 }
 

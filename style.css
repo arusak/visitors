@@ -151,3 +151,38 @@ body {
 #day-switch {
   color: #36a8f1;
 }
+
+#gates {
+  position: relative;
+  display: inline-block;
+  height: 100px;
+
+  background: #398476;
+  border: thin solid #eee;
+  overflow: hidden;
+}
+
+#left, #right {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#left-handle, #right-handle {
+  position: absolute;
+  display: inline-block;
+  height: 100%;
+  background: rgba(0, 30, 30, 0.2);
+  cursor: pointer;
+  z-index: 1;
+}
+
+#clear {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 0;
+}
