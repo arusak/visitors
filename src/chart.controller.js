@@ -102,8 +102,6 @@ export class ChartController {
     }
 
     update({start,end}) {
-        console.log(start,end);
-
         this.start = start;
         this.end = end;
 

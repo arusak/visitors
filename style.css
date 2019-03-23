@@ -114,6 +114,7 @@ body {
   left: 0;
   width: 100%;
   border-bottom: 2px solid #f2f4f5;
+  transition: .3s ease;
 }
 
 #buttons button {

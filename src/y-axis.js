@@ -7,21 +7,22 @@ export class YAxis {
         this.container = container;
         this.height = height;
         this.container.style.height = height + 'px';
+
+        this.ticks = [];
+        for (let i = 0; i <= $limit; i++) {
+            this.ticks[i] = document.createElement('span');
+            this.container.appendChild(this.ticks[i]);
+        }
     }
 
     render(max, ky) {
-        this.container.innerText = '';
-
-        //todo gotta use rounded numbers here
         let p = price(max);
         let gap = Math.round(p * ky);
-        let ticks = [];
-        for (let i = 0; i <= $limit; i++) {
-            let tick = Object.assign(document.createElement('span'), {innerText: i * p});
-            tick.style.top = this.height - (i * gap) + 'px';
-            ticks[i] = tick;
-            this.container.appendChild(tick);
 
+        for (let i = 0; i <= $limit; i++) {
+            let tick = this.ticks[i];
+            tick.innerText = i * p;
+            tick.style.top = Math.round(this.height - (i * gap)) + 'px';
         }
     }
 }
