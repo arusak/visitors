@@ -7,7 +7,6 @@ import {ButtonsController} from './buttons.controller.js';
 import {Mark} from './mark.js';
 import {Minimap} from './minimap.js';
 
-const $dataSet = 4;
 const $defaultSlice = 100;
 const $width = 600;
 const $height = 400;
@@ -15,28 +14,15 @@ const $miniMapHeight = 60;
 const $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export class ChartController {
-    constructor() {
+    constructor(dataSet) {
         this.width = $width;
         this.height = $height;
         this.container = document.getElementById('charts');
         this.container.style.width = this.width + 'px';
         this.container.style.height = this.height + 'px';
 
-        this.loadData().then(data => {
-            this.initCharts(data[$dataSet]);
-            this.render();
-        });
-    }
-
-    loadData() {
-        return fetch('./tg/chart_data.json', {
-            method: 'GET',
-        }).catch(err => {
-            console.error('Error loading chart data');
-            console.error(err);
-        }).then(response => {
-            return response && response.json();
-        });
+        this.initCharts(dataSet);
+        this.render();
     }
 
     initCharts(chartData) {
