@@ -5,11 +5,13 @@ import {XAxis} from './x-axis.js';
 import {Slider} from './slider.js';
 import {ButtonsController} from './buttons.controller.js';
 import {Mark} from './mark.js';
+import {Minimap} from './minimap.js';
 
 const $dataSet = 4;
 const $defaultSlice = 100;
 const $width = 600;
 const $height = 400;
+const $miniMapHeight = 100;
 const $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export class ChartController {
@@ -44,18 +46,18 @@ export class ChartController {
         this.end = dotCount - 1;
 
         this.chartsInfo = this.getChartsInfo(chartData);
-        this.lines = this.chartsInfo.map(info => new Line(info, this.container, this.width, this.height));
+        this.lines = this.chartsInfo.map(info => new Line(info, this.container, this.width, this.height, 2));
         new ButtonsController(this);
 
         this.kx = this.getKx();
-        this.ky = this.getKy();
+        this.ky = this.getKy(this.height);
 
         let dates = this.getXAxisData(chartData);
         this.xAxis = new XAxis(document.getElementById('x-axis'), $width, dates);
         this.yAxis = new YAxis(document.getElementById('y-axis'), $height);
 
         new Slider(this.width, this.chartsInfo, this.start, this.end, this.update.bind(this));
-        //new Minimap();
+        this.minimap = new Minimap(this.chartsInfo, this.width, 100);
 
         this.mark = new Mark(this.lines, this.width, this.height, dates);
 
@@ -63,11 +65,15 @@ export class ChartController {
     }
 
     render() {
-        // console.log(`[${this.start}, ${this.end}]`);
-        this.lines.forEach(line => {
-            line.erase();
-            line.render(this.kx, this.ky, this.start, this.end);
-        });
+        this.ky = this.getKy(this.height);
+
+        this.lines.filter(line => !line.hidden)
+            .forEach(line => {
+                line.erase();
+                line.render(this.kx, this.ky, this.start, this.end);
+            });
+
+        this.minimap.render(this.getKy($miniMapHeight));
         this.mark.erase();
         this.xAxis.render(this.start, this.end, this.kx);
         this.yAxis.render(this.maxY, this.ky);
@@ -90,16 +96,18 @@ export class ChartController {
         return this.width / (this.end - this.start);
     }
 
-    getKy() {
+    getKy(height) {
         // might use for loop or other tech to optimize memory usage
 
-        let maxValues = this.chartsInfo.map(chartData => {
-            let piece = chartData.dots.slice(this.start, this.end);
-            return Math.max(...piece);
-        });
+        let maxValues = this.chartsInfo.filter(chart => !chart.hidden)
+            .map(chartData => {
+                let piece = chartData.dots.slice(this.start, this.end);
+                return Math.max(...piece);
+            });
+
         this.maxY = Math.max(...maxValues);
 
-        return this.height / this.maxY;
+        return height / this.maxY;
     }
 
     update({start, end}) {
@@ -107,18 +115,21 @@ export class ChartController {
         this.end = end;
 
         this.kx = this.getKx();
-        this.ky = this.getKy();
+        this.ky = this.getKy(this.height);
 
         this.render();
     }
 
     showLine(idx) {
-        this.lines[idx].show();
-        this.lines[idx].render(this.kx, this.ky, this.start, this.end);
+        this.chartsInfo[idx].hidden = false;
+        this.lines[idx].updateVisibility();
+        this.render();
     }
 
     hideLine(idx) {
-        this.lines[idx].hide();
+        this.chartsInfo[idx].hidden = true;
+        this.lines[idx].updateVisibility();
+        this.render();
     }
 }
 

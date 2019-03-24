@@ -1,5 +1,5 @@
 export class Line {
-    constructor(chartData, container, width, height) {
+    constructor(chartData, container, width, height, lineWidth) {
         this.chartData = chartData;
         this.width = width;
         this.height = height;
@@ -7,7 +7,7 @@ export class Line {
         let canvas = Object.assign(document.createElement('canvas'), {width, height});
         container.append(canvas);
         this.ctx = canvas.getContext('2d');
-
+        this.ctx.lineWidth = lineWidth;
     }
 
     render(kx, ky, start, end) {
@@ -34,7 +34,6 @@ export class Line {
             log(i);
         }
         this.ctx.strokeStyle = this.chartData.color;
-        this.ctx.lineWidth = 2;
         this.ctx.stroke();
     }
 
@@ -47,13 +46,14 @@ export class Line {
         return Math.trunc(this.height - this.chartData.dots[i + start] * ky) + 0.5;
     }
 
-    show() {
-        this.ctx.canvas.classList.remove('hidden');
-        this.hidden = false;
-    }
+    updateVisibility() {
+        if (this.chartData.hidden && !this.hidden) {
+            this.ctx.canvas.classList.add('hidden');
+            this.hidden = true;
 
-    hide() {
-        this.ctx.canvas.classList.add('hidden');
-        this.hidden = true;
+        } else if (!this.chartData.hidden && this.hidden) {
+            this.ctx.canvas.classList.remove('hidden');
+            this.hidden = false;
+        }
     }
 }
