@@ -8,7 +8,7 @@ let id = url.searchParams.get('id');
 
 loadData().then(data => {
     new VisualController();
-    new ChartController(data[+id]);
+    new ChartController(data[4]);
 });
 
 

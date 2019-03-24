@@ -19,6 +19,12 @@ body.night {
   background: rgba(255, 255, 255, 0.2);
 }
 
+.night #float {
+  background: #253241;
+  color: white;
+  border-color: #253241;
+}
+
 body.night #night-switch {
   display: none;
 }

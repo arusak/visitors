@@ -1,25 +1,31 @@
-const $shift = 150;
+const $shift = 30;
 
 export class Float {
-    constructor(width) {
+    constructor(lines, width) {
         this.width = width;
+        this.lines = lines;
         this.view = document.getElementById('float');
         this.visible = false;
     }
 
     render(left, date, values) {
-        let str = `${date}<br>`;
+        let str = `<span class="date">${date}</span>`;
 
-        values.forEach(v => str += `${v}<br>`);
+        values.forEach((v, i) => str += `
+            <span class="chart" style="color: ${this.lines[i].chartData.color}">
+                <span class="value">${v}</span><br>
+                <span class="title">${this.lines[i].chartData.title}</span>
+            </span>
+        `);
         this.view.innerHTML = str;
 
-        this.view.style.left = left + 'px';
 
-        if (left > this.width / 2) {
-            this.view.style.transform = `translateX(-${$shift}px)`
+        if (left < this.width / 2) {
+            this.view.style.left = left + $shift + 'px';
+            // this.view.style.transform = `translateX(${$shift}px)`
         } else {
-            this.view.style.transform = `translateX(${-Math.round(this.view.clientWidth) + $shift}px)`
-            // this.view.style.left = left - this.view.clientWidth + 30 + 'px';
+            this.view.style.left = left - Math.round(this.view.clientWidth + $shift) + 'px';
+            // this.view.style.transform = `translateX(-${Math.round(this.view.clientWidth + $shift)}px)`
         }
 
         if (!this.visible) {

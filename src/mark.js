@@ -11,7 +11,7 @@ export class Mark {
         this.lines = lines;
         this.dates = dates;
         this.rulerColor = '#dfe6eb';
-        this.float = new Float(width);
+        this.float = new Float(lines, width);
     }
 
     render(mouseX) {
