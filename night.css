@@ -25,6 +25,10 @@ body.night {
   border-color: #253241;
 }
 
+.night button {
+  color: #999;
+}
+
 body.night #night-switch {
   display: none;
 }

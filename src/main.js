@@ -1,14 +1,12 @@
 import {ChartController} from './chart.controller.js';
 import {VisualController} from './visual.controller.js';
 
-console.log(window.location.search);
-
 let url = new URL(window.location);
 let id = url.searchParams.get('id');
 
 loadData().then(data => {
     new VisualController();
-    new ChartController(data[4]);
+    new ChartController(data[+id]);
 });
 
 
