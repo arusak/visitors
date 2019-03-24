@@ -11,7 +11,7 @@ const $dataSet = 4;
 const $defaultSlice = 100;
 const $width = 600;
 const $height = 400;
-const $miniMapHeight = 100;
+const $miniMapHeight = 60;
 const $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export class ChartController {
@@ -56,8 +56,9 @@ export class ChartController {
         this.xAxis = new XAxis(document.getElementById('x-axis'), $width, dates);
         this.yAxis = new YAxis(document.getElementById('y-axis'), $height);
 
-        new Slider(this.width, this.chartsInfo, this.start, this.end, this.update.bind(this));
-        this.minimap = new Minimap(this.chartsInfo, this.width, 100);
+        new Slider(this.width, $miniMapHeight, this.chartsInfo, this.start, this.end, this.update.bind(this));
+        this.minimap = new Minimap(this.chartsInfo, this.width, $miniMapHeight);
+        this.minimap.render(this.getKy($miniMapHeight));
 
         this.mark = new Mark(this.lines, this.width, this.height, dates);
 
@@ -73,7 +74,6 @@ export class ChartController {
                 line.render(this.kx, this.ky, this.start, this.end);
             });
 
-        this.minimap.render(this.getKy($miniMapHeight));
         this.mark.erase();
         this.xAxis.render(this.start, this.end, this.kx);
         this.yAxis.render(this.maxY, this.ky);
@@ -123,12 +123,14 @@ export class ChartController {
     showLine(idx) {
         this.chartsInfo[idx].hidden = false;
         this.lines[idx].updateVisibility();
+        this.minimap.render();
         this.render();
     }
 
     hideLine(idx) {
         this.chartsInfo[idx].hidden = true;
         this.lines[idx].updateVisibility();
+        this.minimap.render();
         this.render();
     }
 }

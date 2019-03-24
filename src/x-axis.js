@@ -31,17 +31,17 @@ export class XAxis {
             let newVisibility = i % n === 0;
             let oldVisibility = this.visibility[i];
             // if (newVisibility !== oldVisibility) {
-                this.updateTickVisibility(i, newVisibility, kx);
+            this.updateTickVisibility(i, newVisibility, kx);
             // }
         }
 
         this.wrapper.style.left = -kx * start + 'px';
     }
 
-    updateTickVisibility(idx, visible, kx){
+    updateTickVisibility(idx, visible, kx) {
         this.ticks[idx].style.opacity = visible ? '1' : '0';
         if (visible) {
-            this.ticks[idx].style.left = kx * idx + 'px';
+            this.ticks[idx].style.left = Math.trunc(kx * idx) + 'px';
         }
     }
 }

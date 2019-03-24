@@ -2,17 +2,17 @@ const $handleWidth = 10;
 const $magnet = 0.99;
 
 export class Slider {
-    constructor(width, chartsData, start, end, onChange) {
+    constructor(width, height, chartsData, start, end, onChange) {
         this.callback = onChange;
         this.charts = chartsData;
         this.width = width;
 
         this.kx = this.width / this.charts[0].dots.length;
 
-        this.init(start, end);
+        this.init(start, end, height);
     }
 
-    init(start, end) {
+    init(start, end, height) {
         let gates = document.getElementById('slider');
         let left = document.getElementById('left');
         let leftHandle = document.getElementById('left-handle');
@@ -20,6 +20,7 @@ export class Slider {
         let rightHandle = document.getElementById('right-handle');
         let clear = document.getElementById('clear');
 
+        gates.style.height = height + 'px';
         gates.style.width = this.width + 'px';
         left.style.left = start * this.kx - this.width + 'px';
         right.style.left = end * this.kx + 'px';

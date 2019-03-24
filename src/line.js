@@ -4,7 +4,7 @@ export class Line {
         this.width = width;
         this.height = height;
 
-        let canvas = Object.assign(document.createElement('canvas'), {width, height});
+        let canvas = Object.assign(document.createElement('canvas'), {width, height, className: 'line'});
         container.append(canvas);
         this.ctx = canvas.getContext('2d');
         this.ctx.lineWidth = lineWidth;

@@ -10,7 +10,7 @@ export class ButtonsController {
             {
                 dataSet: {idx},
                 className: 'active',
-                innerHTML: `<span style="background:${meta.color}" class="active"></span>${meta.title}`
+                innerHTML: `<span style="background-color:${meta.color};border-color:${meta.color}" class="active">✓</span>${meta.title}`
             });
         button.addEventListener('click', () => {
             if (button.className === 'active') {
