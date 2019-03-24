@@ -1,22 +1,19 @@
 const $handleWidth = 10;
 const $magnet = 0.99;
 
-export class Minimap {
-    constructor(container, width, lines, start, end, onChange) {
+export class Slider {
+    constructor(width, chartsData, start, end, onChange) {
         this.callback = onChange;
-        this.container = container;
-        this.lines = lines;
+        this.charts = chartsData;
         this.width = width;
 
-        this.kx = this.width / this.lines[0].dots.length;
+        this.kx = this.width / this.charts[0].dots.length;
 
-        this.render();
-
-        this.initGates(start, end);
+        this.init(start, end);
     }
 
-    initGates(start, end) {
-        let gates = document.getElementById('gates');
+    init(start, end) {
+        let gates = document.getElementById('slider');
         let left = document.getElementById('left');
         let leftHandle = document.getElementById('left-handle');
         let right = document.getElementById('right');
@@ -93,14 +90,6 @@ export class Minimap {
             start: Math.trunc((leftOffset + this.width) / this.kx),
             end: Math.trunc(rightOffset / this.kx)
         };
-    }
-
-
-    render() {
-        // let canvas = Object.assign(document.createElement('canvas'), {width, height});
-        // let ctx = canvas.getContext('2d');
-
-        // this.container.append(canvas);
     }
 }
 

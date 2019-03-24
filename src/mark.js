@@ -23,18 +23,20 @@ export class Mark {
         let idx = Math.round((mouseX * visibleLines[0].pixelsX.length) / this.width);
         let x = visibleLines[0].pixelsX[idx];
         let yPixels = visibleLines.map(line => line.pixelsY[idx]);
-        let yValues = visibleLines.map(line => line.dots[idx]);
+        let yValues = visibleLines.map(line => line.chartData.dots[idx]);
 
         this.drawRuler(x);
         this.float.render(x, this.dates[idx], yValues);
 
+        this.x = x;
+
         visibleLines.forEach((line, idx) => {
-            this.drawCircle(x, yPixels[idx], line.info.color);
+            this.drawCircle(x, yPixels[idx], line.chartData.color);
         });
     }
 
     erase() {
-        this.ctx.clearRect(0, 0, this.width, this.height);
+        this.ctx.clearRect(this.x - $radius - $circleStrokeWidth, 0, ($radius + $circleStrokeWidth) * 2, this.height);
         this.float.hide();
     }
 

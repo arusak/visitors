@@ -2,7 +2,7 @@ import {Line} from './line.js';
 import {ChartInfo} from './chart-info.js';
 import {YAxis} from './y-axis.js';
 import {XAxis} from './x-axis.js';
-import {Minimap} from './minimap.js';
+import {Slider} from './slider.js';
 import {ButtonsController} from './buttons.controller.js';
 import {Mark} from './mark.js';
 
@@ -44,7 +44,7 @@ export class ChartController {
         this.end = dotCount - 1;
 
         this.chartsInfo = this.getChartsInfo(chartData);
-        this.lines = this.chartsInfo.map(info => new Line(info, this.container));
+        this.lines = this.chartsInfo.map(info => new Line(info, this.container, this.width, this.height));
         new ButtonsController(this);
 
         this.kx = this.getKx();
@@ -54,9 +54,10 @@ export class ChartController {
         this.xAxis = new XAxis(document.getElementById('x-axis'), $width, dates);
         this.yAxis = new YAxis(document.getElementById('y-axis'), $height);
 
-        this.minimap = new Minimap(this.container, this.width, this.lines, this.start, this.end, this.update.bind(this));
+        new Slider(this.width, this.chartsInfo, this.start, this.end, this.update.bind(this));
+        //new Minimap();
+
         this.mark = new Mark(this.lines, this.width, this.height, dates);
-        this.mark.bgColor = 'white';
 
         this.render();
     }
@@ -75,7 +76,7 @@ export class ChartController {
     getChartsInfo(chartData) {
         return Object.keys(chartData.types)
             .filter(key => chartData.types[key] === 'line')
-            .map(key => new ChartInfo(chartData, key, this.width, this.height));
+            .map(key => new ChartInfo(chartData, key));
     }
 
     getXAxisData(chartData) {
@@ -92,8 +93,8 @@ export class ChartController {
     getKy() {
         // might use for loop or other tech to optimize memory usage
 
-        let maxValues = this.chartsInfo.map(line => {
-            let piece = line.dots.slice(this.start, this.end);
+        let maxValues = this.chartsInfo.map(chartData => {
+            let piece = chartData.dots.slice(this.start, this.end);
             return Math.max(...piece);
         });
         this.maxY = Math.max(...maxValues);
@@ -101,7 +102,7 @@ export class ChartController {
         return this.height / this.maxY;
     }
 
-    update({start,end}) {
+    update({start, end}) {
         this.start = start;
         this.end = end;
 

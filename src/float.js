@@ -1,4 +1,4 @@
-const $shift = 30;
+const $shift = 150;
 
 export class Float {
     constructor(width) {
@@ -15,7 +15,7 @@ export class Float {
 
         this.view.style.left = left + 'px';
 
-        if (left < this.width / 2) {
+        if (left > this.width / 2) {
             this.view.style.transform = `translateX(-${$shift}px)`
         } else {
             this.view.style.transform = `translateX(${-Math.round(this.view.clientWidth) + $shift}px)`
