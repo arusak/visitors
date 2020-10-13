@@ -2,36 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Telegram contest</title>
-    <style>
-        iframe {
-            border: none;
-            border-bottom: thin solid #cccccc;
-            width: 600px;
-            height: 650px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="night.css">
 </head>
 <body>
-
-<script>
-    console.log('==========================================================');
-    console.log('Greetings to Telegram team!');
-    console.log('Thanks for the opportunity to exercise my coding skills ');
-    console.log('and try some new technologies.');
-    console.log('This app isn`t perfect, but making it was fun anyway.');
-    console.log('');
-    console.log('Best wishes, @antonru');
-    console.log('==========================================================');
-
-    for (let i = 0; i < 5; i++) {
-        let iframe = document.createElement('iframe');
-        iframe.src = 'app.html?id=' + i;
-        document.body.appendChild(iframe);
-    }
-</script>
+<div id="scene">
+    <div id="float"></div>
+    <div id="mark"></div>
+    <div id="charts"></div>
+    <div id="x-axis"></div>
+    <div id="y-axis"></div>
+</div>
+<div id="minimap">
+    <div id="slider">
+        <div id="left">
+            <div id="left-handle"></div>
+        </div>
+        <div id="clear"></div>
+        <div id="right">
+            <div id="right-handle"></div>
+        </div>
+    </div>
+</div>
+<div id="buttons"></div>
+<a id="night-switch">Switch to night mode</a>
+<a id="day-switch">Switch to day mode</a>
+<script type="module" src="./src/main.js"></script>
 </body>
 </html>
